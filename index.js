@@ -13,18 +13,40 @@ const randomMeal = async function() {
         if (response.ok) {
             const randomIndex = Math.floor(Math.random() * data.hits.length);
             const meal = data.hits[randomIndex].recipe;
-            if (document.querySelector("#results-grid").hasChildNodes) {
-                /* document.querySelector('#results-grid').innerHTML = '';
-                displayMeal(meal);
-            } else { */
-                displayMeal(meal);
-            }
+            const mealsContainer = document.getElementById('results-grid');
+
+            mealsContainer.innerHTML = '';
+            const input = document.getElementById('search-input').value = '';
+            displayMeal(meal);
         }
 
     } catch (error) {
         console.error('Errore durante la fetch: ',error);
     }
 }
+
+document.getElementById('search-input').addEventListener('input', async function () {
+    const input = document.getElementById('search-input').value;
+    const mealsContainer = document.getElementById('results-grid');
+    if (input) {
+        const url = `https://api.edamam.com/api/recipes/v2?app_id=${appID}&app_key=${apiKey}&type=public&q=${input}`;
+        try {
+            const response = await fetch(url);
+            const data = await response.json();
+
+            if (response.ok) {
+                mealsContainer.innerHTML = '';
+                for (let i = 0; i < data.hits.length; i++) {
+                    displayMeal(data.hits[i].recipe);
+                }
+            } else {
+                console.error('Errore nella fetch: ', data);
+            }
+        } catch (error) {
+            console.error('Errore durante la fetch: ', error);
+        }
+    }
+});
 
 function displayMeal(meal) {
     const mealsContainer = document.getElementById('results-grid');
@@ -48,7 +70,6 @@ function displayMeal(meal) {
         </div>
         `;
 
-        console.log(`total weight: ${meal.totalWeight}, kcal: ${meal.calories}`);
 
     mealsContainer.appendChild(mealElement);
   }
