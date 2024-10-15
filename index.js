@@ -40,13 +40,15 @@ function displayMeal(meal) {
         </div>
         <div class="meal-footer">
             <div class="calories-section">
-                <p><strong>Kcal:</strong><br> ${Math.round(meal.calories)} kcal</p>
+                <p><strong>Kcal/100g:</strong><br> ${Math.round((meal.calories / meal.totalWeight) * 100)} kcal</p>
             </div>
             <div class="button-section">
                 <a href="${meal.url}" target="_blank" class="meal-url">></a>
             </div>
         </div>
         `;
+
+        console.log(`total weight: ${meal.totalWeight}, kcal: ${meal.calories}`);
 
     mealsContainer.appendChild(mealElement);
   }

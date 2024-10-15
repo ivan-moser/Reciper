@@ -132,9 +132,8 @@ h2 {
     border-radius: 30px;
     background-color: #fff;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    max-width: 25vw;
-
-    overflow-wrap: break-word;
+    width: 30vw;
+    
     overflow: hidden;
 
     display: flex;
@@ -144,13 +143,23 @@ h2 {
 
 .meal-header {
     background-color: rgb(241, 235, 228);
-    padding: 10px;
-    height: 4rem;
+    height: 5rem;
     width: 100%;
     border-radius: 30px 30px 0 0;
-
+    overflow: hidden; /* Nasconde il contenuto che eccede */
     display: flex;
     align-items: center;
+    justify-content: center;
+}
+
+.meal-title {
+    margin: 10px;
+    font-size: 1.5rem;
+    white-space: nowrap;
+    overflow:hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .meal-img {
