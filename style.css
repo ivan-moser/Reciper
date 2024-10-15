@@ -6,13 +6,18 @@
     color: #262626;
 }
 
+html {
+    width: 100vw;
+    overflow: hidden;
+}
+
 * {
     margin: 0;
     padding: 0;
 }
 
 h2 {
-    font-size: 1.7rem;
+    font-size: 2rem;
     font-weight: 400;
 }
 
@@ -42,7 +47,7 @@ h2 {
 }
 
 .btn {
-    background-color: #fff;
+    background-color: rgb(222, 207, 190);
     font-size: 1.2rem;
     border: none;
     padding: 15px 25px;
