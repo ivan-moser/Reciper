@@ -8,7 +8,7 @@
 
 html {
     width: 100vw;
-    overflow: hidden;
+    overflow-x: hidden;
 }
 
 * {
@@ -115,6 +115,7 @@ h2 {
 
 .more {
     background-color: rgb(222, 207, 190);
+    margin-top: 30px;
 }
 
 #results-container {
