@@ -13,7 +13,12 @@ const randomMeal = async function() {
         if (response.ok) {
             const randomIndex = Math.floor(Math.random() * data.hits.length);
             const meal = data.hits[randomIndex].recipe;
-            displayMeal(meal);
+            if (document.querySelector("#results-grid").hasChildNodes) {
+                /* document.querySelector('#results-grid').innerHTML = '';
+                displayMeal(meal);
+            } else { */
+                displayMeal(meal);
+            }
         }
 
     } catch (error) {
@@ -22,14 +27,28 @@ const randomMeal = async function() {
 }
 
 function displayMeal(meal) {
-    const mealContainer = document.getElementById('results-container');
-    mealContainer.innerHTML = `
-      <h2>${meal.label}</h2>
-      <img src="${meal.image}" alt="${meal.label}" />
-      <p><strong>Categorie:</strong> ${meal.dishType.join(', ')}</p>
-      <p><strong>Calorie:</strong> ${Math.round(meal.calories)} kcal</p>
-      <a href="${meal.url}" target="_blank">Vedi ricetta completa</a>
-    `;
+    const mealsContainer = document.getElementById('results-grid');
+    const mealElement = document.createElement('div');
+    mealElement.setAttribute('class', 'meal-element');
+
+    mealElement.innerHTML = `
+        <div class="meal-header">
+            <h2 class="meal-title">${meal.label}</h2>
+        </div>
+        <div class="meal-main">
+            <img src="${meal.image}" alt="${meal.label}" class="meal-img" />
+        </div>
+        <div class="meal-footer">
+            <div class="calories-section">
+                <p><strong>Kcal:</strong><br> ${Math.round(meal.calories)} kcal</p>
+            </div>
+            <div class="button-section">
+                <a href="${meal.url}" target="_blank" class="meal-url">></a>
+            </div>
+        </div>
+        `;
+
+    mealsContainer.appendChild(mealElement);
   }
 
-randomMeal();
+
